@@ -1,16 +1,21 @@
 import webapp2
 import jinja2
 from google.appengine.api import users
+from google.appengine.ext import ndb
 import os
+from myuser import MyUser
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
         self.response.headers["Content-Type"] = "text/html"
         # self.response.write("hello world")
-        JINJA_ENVIRONMENT = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__)), extensions=["jinja2.ext.autoescape"],
+        JINJA_ENVIRONMENT = jinja2.Environment(
+        loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+        extensions=["jinja2.ext.autoescape"],
         autoescape=True)
         url = ""
         url_string = ""
+        welcome = "Welcome back"
         user = users.get_current_user()
         if user:
             url = users.create_logout_url(self.request.uri)

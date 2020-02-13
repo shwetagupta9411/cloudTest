@@ -5,7 +5,7 @@
   </head>
   <body>
     {% if user %}
-      <p>Hello {{ user.email() }} welcome to the application</p>
+      <p>{{ welcome }} {{ user.email() }} welcome to the application</p>
     {% else %}
       <p>Hello guest welcome to the application</p>
     {% endif %}
