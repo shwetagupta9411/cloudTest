@@ -20,6 +20,12 @@ class MainPage(webapp2.RequestHandler):
         if user:
             url = users.create_logout_url(self.request.uri)
             url_string = "logout"
+            myuser_key = ndb.Key("MyUser", user.user_id())
+            myuser = myuser_key.get()
+            if myuser == None:
+                welcome = "Welcome to the application"
+                myuser = MyUser(id=user.user_id())
+                myuser.put()
         else:
             url = users.create_login_url(self.request.uri)
             url_string = "login"
